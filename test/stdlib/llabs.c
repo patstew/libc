@@ -24,7 +24,9 @@ static void llabs_test(void** state)
 	assert_int_equal(imaxabs(LLONG_MAX), LLONG_MAX);
 	assert_int_equal(imaxabs(-LLONG_MAX), LLONG_MAX);
 	assert_int_equal(imaxabs(LLONG_MIN), LLONG_MIN);
-	assert_int_equal(imaxabs(-LLONG_MIN), LLONG_MIN);
+
+	// We add one to prevent an overflow warning with -LLONG_MIN
+	assert_int_equal(imaxabs(-(LLONG_MIN + 1)), (LLONG_MIN + 1));
 }
 
 #pragma mark - Public Functions -

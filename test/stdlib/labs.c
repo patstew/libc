@@ -24,7 +24,9 @@ static void labs_test(void** state)
 	assert_int_equal(imaxabs(LONG_MAX), LONG_MAX);
 	assert_int_equal(imaxabs(-LONG_MAX), LONG_MAX);
 	assert_int_equal(imaxabs(LONG_MIN), LONG_MIN);
-	assert_int_equal(imaxabs(-LONG_MIN), LONG_MIN);
+
+	// We add one to prevent an overflow warning with -LONG_MIN
+	assert_int_equal(imaxabs(-(LONG_MIN + 1)), (LONG_MIN + 1));
 }
 
 #pragma mark - Public Functions -

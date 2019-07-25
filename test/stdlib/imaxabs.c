@@ -24,7 +24,9 @@ static void imaxabs_test(void** state)
 	assert_int_equal(imaxabs(INTMAX_MAX), INTMAX_MAX);
 	assert_int_equal(imaxabs(-INTMAX_MAX), INTMAX_MAX);
 	assert_int_equal(imaxabs(INTMAX_MIN), INTMAX_MIN);
-	assert_int_equal(imaxabs(-INTMAX_MIN), INTMAX_MIN);
+
+	// We add one to prevent an overflow warning with -INTMAX_MIN
+	assert_int_equal(imaxabs(-(INTMAX_MIN + 1)), (INTMAX_MIN + 1));
 }
 
 #pragma mark - Public Functions -
